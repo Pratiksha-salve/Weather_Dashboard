@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gradient-to-r from-blue-50 to-blue-200 h-screen">
     <div id="container" class="mx-auto p-2">
-        <header id="header" class="flex justify-center items-center h-20 mb-4 bg-gradient-to-r from-blue-200 to-blue-50 rounded-sm">
+        <header id="header" class="flex justify-center items-center h-20 mb-0.5 bg-gradient-to-r from-blue-200 to-blue-50 rounded-sm">
             <h1 class="text-4xl font-bold">Weather Dashboard</h1>
         </header>
 
@@ -35,15 +35,15 @@
 
             <!-- Weather Display Section -->
             <section id="weather" class="w-full lg:w-2/3 space-y-6">
-                <article id="local" class="bg-white shadow-lg rounded-lg p-6">
+                <article id="local" class="bg-white shadow-lg rounded-lg p-4 flex flex-row justify-between">
                     <!-- Weather data will be displayed here dynamically -->
                 </article>
 
-                <section id="days"  class="bg-white shadow-lg rounded-lg p-6">
-                    <article id="weekForecast" class="p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <section id="days"  class="bg-white shadow-lg rounded-lg p-4">
+                    <!-- <article id="weekForecast" class="p-2 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2"> -->
                     
                         <!-- 5-Day Forecast data will be displayed here dynamically -->
-                    </article>
+                    <!-- </article> -->
                 </section>
             </section>
         </section>
