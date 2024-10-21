@@ -7,6 +7,7 @@
     <script src="script.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gradient-to-r from-blue-50 to-blue-200 h-screen">
     <div id="container" class="mx-auto p-2">
         <header id="header" class="flex justify-center items-center h-20 mb-0.5 bg-gradient-to-r from-blue-200 to-blue-50 rounded-sm">
@@ -20,8 +21,9 @@
                 <h2 class="text-xl font-semibold mb-4">Enter a City Name</h2>
                 <input type="text" id="city-input" class="w-full p-3 mb-4 border border-gray-300 rounded-md" placeholder="E.g., New York, London, Tokyo" />
                 <button id="search-btn" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-600">Search</button>
-
-                    <!-- Divider with 'or' and Current Location Button -->
+                
+               
+                <!-- Divider with 'or' and Current Location Button -->
                 <div class="flex items-center justify-between my-4">
                     <hr class="w-full border-gray-300">
                     <span class="mx-4 text-gray-500">or</span>
@@ -31,19 +33,17 @@
                 <button id="location-btn" class="w-full bg-gray-500 text-white p-3 rounded-lg hover:bg-gray-600">
                     Use Current Location
                 </button>
+
             </section>
 
             <!-- Weather Display Section -->
-            <section id="weather" class="w-full lg:w-2/3 space-y-6">
-                <article id="local" class="bg-white shadow-lg rounded-lg p-4 flex flex-row justify-between">
+            <section id="weatherDisplay" class="w-full lg:w-2/3 space-y-6">
+                <article id="weatherToday" class="bg-white shadow-lg rounded-lg p-4 flex flex-row justify-between">
                     <!-- Weather data will be displayed here dynamically -->
                 </article>
 
-                <section id="days"  class="bg-white shadow-lg rounded-lg p-4">
-                    <!-- <article id="weekForecast" class="p-2 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2"> -->
-                    
+                <section id="weather5Days"  class="bg-white shadow-lg rounded-lg p-4">
                         <!-- 5-Day Forecast data will be displayed here dynamically -->
-                    <!-- </article> -->
                 </section>
             </section>
         </section>

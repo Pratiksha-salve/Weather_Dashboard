@@ -1,28 +1,46 @@
 const apiKey = 'bc33ca9bd41712ad4e263715ca4988a7';
-const search = document.getElementById('search-btn');
+const search = document.getElementById('search-btn'); //get search button
+const location = document.getElementById('location-btn') //get location button
 
-search.addEventListener('click', searching);
 
-function searching() {
-
-    const cityInput = document.getElementById('city-input'); // Get the input element
-    const city = cityInput.value; // Get the current value of the input
-    if (city === '') {
-        return alert("Please enter a city name.");
+// Search button event listener
+search.addEventListener('click', function () {
+    const cityInput = document.getElementById('city-input');
+    const city = cityInput.value;
+    if (city) {
+        fetchWeatherByCity(city);// Pass the city value to the function
+        cityInput.value =''; // Clear the input field
+    } else {
+        alert("Please enter a city name.");
     }
+});
 
-    // Clear the previous forecast data
-    const days = document.getElementById("days");
-    days.innerHTML = ''; // Clears previous forecasts and the title
 
-    // current weather conditions
+//location button event listener
+location.addEventListener('click',()=>{
+    navigator.geolocation.getCurrentPosition(success,error);
+
+    const success = (position) => {
+        console.log(position)
+    }
+    const error = () => {
+        console.log('unable to get location')
+    }
+});
+
+function fetchWeatherByCity(city) {
+
+    const fiveDays = document.getElementById("weather5Days");
+    fiveDays.innerHTML = ''; // Clears previous forecasts and the title
+
+    // Fetch current weather conditions
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
         .then(response => response.json())
         .then(data => {
-            const localWeather = document.getElementById('local');
+            const todayWeather = document.getElementById('weatherToday');
             const iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
-            localWeather.innerHTML = `<div>
+            todayWeather.innerHTML = `<div>
                 <h1 class="text-2xl font-bold">${data.name}</h1>
                 <p>Temperature: ${(data.main.temp - 273.15).toFixed(2)}°C</p>
                 <p>Wind: ${data.wind.speed} m/s</p>
@@ -33,18 +51,18 @@ function searching() {
         })
         .catch(error => console.log('Error:', error));
 
-    // 5 day forecast
+    // Fetch 5 day forecast
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
         .then(response => response.json())
         .then(forecast => {
             // Insert title for the 5-day forecast
-            days.insertAdjacentHTML('afterbegin', `<h1 class="text-2xl font-semibold mb-4">5-Days Weather Forecast for ${forecast.city.name}</h1>`);
+            fiveDays.insertAdjacentHTML('afterbegin', `<h1 class="text-2xl font-semibold mb-4">5-Days Weather Forecast for ${forecast.city.name}</h1>`);
 
             // Create a div for the 5-day forecast tiles
             const weekForecast = document.createElement('div');
             weekForecast.classList.add('p-2', 'grid', 'grid-cols-1', 'md:grid-cols-3', 'lg:grid-cols-5', 'gap-2');
-            days.appendChild(weekForecast); // Append this div to the days section
-            
+            fiveDays.appendChild(weekForecast); // Append this div to the fiveDays section
+
             const forecastList = forecast.list;
             const dailyForecasts = [];
 
@@ -69,5 +87,4 @@ function searching() {
         })
         .catch(error => console.log('Error:', error));
 
-    cityInput.value = ''; // Clear the input field
 }
