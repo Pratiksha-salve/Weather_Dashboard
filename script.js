@@ -27,6 +27,32 @@ function fetchWeatherByCity(city) {
             const todayWeather = document.getElementById('weatherToday');
             const iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
+                        // Set background color based on weather condition
+                        let backgroundColor = '';
+                        switch (data.weather[0].main) {
+                            case 'Clear':
+                                backgroundColor = 'bg-sky-200';
+                                break;
+                            case 'Clouds':
+                                backgroundColor = 'bg-gray-300';
+                                break;
+                            case 'Rain':
+                                backgroundColor = 'bg-blue-500';
+                                break;
+                            case 'Snow':
+                                backgroundColor = 'bg-white';
+                                break;
+                            case 'Thunderstorm':
+                                backgroundColor = 'bg-purple-300';
+                                break;
+                            default:
+                                backgroundColor = 'bg-gray-100'; // Default color
+                                break;
+                        }
+            
+                        // Update the background color of the div
+                        todayWeather.className = `rounded transition-colors duration-300 shadow-lg rounded-lg p-4 flex flex-row justify-between ${backgroundColor}`;
+
             todayWeather.innerHTML = `<div>
                 <h1 class="text-2xl font-bold">${data.name}</h1>
                 <p>Temperature: ${(data.main.temp - 273.15).toFixed(2)}°C</p>
@@ -62,15 +88,41 @@ function fetchWeatherByCity(city) {
                 const day = new Date(dayData.dt_txt).toDateString();
                 const url = `https://openweathermap.org/img/wn/${dayData.weather[0].icon}.png`;
 
+                let backgroundColor = '';
+        switch (dayData.weather[0].main) {
+            case 'Clear':
+                backgroundColor = 'bg-sky-200';
+                break;
+            case 'Clouds':
+                backgroundColor = 'bg-gray-300';
+                break;
+            case 'Rain':
+                backgroundColor = 'bg-blue-300';
+                break;
+            case 'Snow':
+                backgroundColor = 'bg-white';
+                break;
+            case 'Thunderstorm':
+                backgroundColor = 'bg-purple-300';
+                break;
+            default:
+                backgroundColor = 'bg-gray-100'; // Default color
+                break;
+        }
+
                 dailyForecasts.push(`
-                    <div class="m-2 p-2 bg-blue-100 rounded-md shadow-md text-sm">
-                        <h2 class="text-sm font-semibold">${day}</h2>
-                        <p><b>${dayData.weather[0].description}</b></p>
-                        <img src="${url}" alt="${dayData.weather[0].description} icon" />
-                        <p>Temp: ${(dayData.main.temp - 273.15).toFixed(2)}°C</p>
-                        <p>Wind: ${dayData.wind.speed} m/s</p>
-                        <p>Humidity: ${dayData.main.humidity}%</p>
-                    </div>
+                    <div class="flex flex-row md:flex-col m-2 p-2 ${backgroundColor} rounded-md shadow-md text-base md:text-sm justify-evenly lg:justify-start items-center lg:items-start">
+                <div>
+                    <h2 class="text-sm font-semibold mb-2">${day}</h2>
+                    <p>Temp: ${(dayData.main.temp - 273.15).toFixed(2)}°C</p>
+                    <p>Wind: ${dayData.wind.speed} m/s</p>
+                    <p>Humidity: ${dayData.main.humidity}%</p>
+                </div>
+                <div class="flex justify-center flex-col md:flex-col-reverse md:items-start mt-2">
+                    <img src="${url}" alt="${dayData.weather[0].description} icon" />
+                    <p><b>${dayData.weather[0].description}</b></p>
+                </div>
+                </div>
                 `);
             }
             weekForecast.innerHTML = dailyForecasts.join(""); // Insert forecast into the weekForecast div
@@ -131,14 +183,42 @@ function loadWeatherFromLocalStorage() {
         const todayWeather = document.getElementById('weatherToday');
         const iconURL = `https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`;
 
+        // Set background color based on weather condition
+        let backgroundColor = '';
+        switch (currentWeather.weather[0].main) {
+            case 'Clear':
+                backgroundColor = 'bg-sky-200';
+                break;
+            case 'Clouds':
+                backgroundColor = 'bg-gray-300';
+                break;
+            case 'Rain':
+                backgroundColor = 'bg-blue-300';
+                break;
+            case 'Snow':
+                backgroundColor = 'bg-white';
+                break;
+            case 'Thunderstorm':
+                backgroundColor = 'bg-purple-300';
+                break;
+            default:
+                backgroundColor = 'bg-gray-100'; // Default color
+                break;
+        }
+
+        // Update the background color of the div
+        todayWeather.className = `rounded transition-colors duration-300 shadow-lg rounded-lg p-4 flex flex-row justify-between ${backgroundColor}`;
+
         todayWeather.innerHTML = `<div>
             <h1 class="text-2xl font-bold">${currentWeather.name}</h1>
             <p>Temperature: ${(currentWeather.main.temp - 273.15).toFixed(2)}°C</p>
             <p>Wind: ${currentWeather.wind.speed} m/s</p>
-            <p>Humidity: ${currentWeather.main.humidity}%</p></div>
+            <p>Humidity: ${currentWeather.main.humidity}%</p>
+            </div>
             <div>
             <img src="${iconURL}" alt="${currentWeather.weather[0].description} icon" />
-            <p><b>${currentWeather.weather[0].description}</b></p></div>`;
+            <p><b>${currentWeather.weather[0].description}</b></p>
+            </div>`;
     }
 
     if (fiveDayForecast) {
@@ -158,14 +238,40 @@ function loadWeatherFromLocalStorage() {
             const day = new Date(dayData.dt_txt).toDateString();
             const url = `https://openweathermap.org/img/wn/${dayData.weather[0].icon}.png`;
 
+            let backgroundColor = '';
+        switch (dayData.weather[0].main) {
+            case 'Clear':
+                backgroundColor = 'bg-sky-200';
+                break;
+            case 'Clouds':
+                backgroundColor = 'bg-gray-300';
+                break;
+            case 'Rain':
+                backgroundColor = 'bg-sky-300';
+                break;
+            case 'Snow':
+                backgroundColor = 'bg-white';
+                break;
+            case 'Thunderstorm':
+                backgroundColor = 'bg-purple-300';
+                break;
+            default:
+                backgroundColor = 'bg-gray-100'; // Default color
+                break;
+        }
+
             dailyForecasts.push(`
-                <div class="m-2 p-2 bg-blue-100 rounded-md shadow-md text-sm">
-                    <h2 class="text-sm font-semibold">${day}</h2>
-                    <p><b>${dayData.weather[0].description}</b></p>
-                    <img src="${url}" alt="${dayData.weather[0].description} icon" />
+                <div class="flex flex-row md:flex-col m-2 p-2 ${backgroundColor} rounded-md shadow-md text-base md:text-sm justify-evenly lg:justify-start items-center lg:items-start">
+                <div>
+                    <h2 class="text-sm font-semibold mb-2">${day}</h2>
                     <p>Temp: ${(dayData.main.temp - 273.15).toFixed(2)}°C</p>
                     <p>Wind: ${dayData.wind.speed} m/s</p>
                     <p>Humidity: ${dayData.main.humidity}%</p>
+                </div>
+                <div class="flex justify-center flex-col md:flex-col-reverse md:items-start mt-2">
+                    <img src="${url}" alt="${dayData.weather[0].description} icon" />
+                    <p><b>${dayData.weather[0].description}</b></p>
+                </div>
                 </div>
             `);
         }

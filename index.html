@@ -20,9 +20,8 @@
             <section id="searchbar" class="bg-white shadow-lg rounded-lg p-6 w-full lg:w-1/3">
                 <h2 class="text-xl font-semibold mb-4">Enter a City Name</h2>
                 <input type="text" id="city-input" class="w-full p-3 mb-4 border border-gray-300 rounded-md" placeholder="E.g., New York, London, Tokyo" />
-                <button id="search-btn" class="w-full bg-blue-500 hover:bg-blue-900 text-white p-3 rounded-lg">Search</button>
-                
-               
+                <button id="search-btn" class="w-full bg-gradient-to-r from-indigo-400 to-indigo-700 hover:bg-gradient-to-r hover:from-sky-700 hover:to-sky-400 text-white p-3 rounded-lg">Search</button>
+                 
                 <!-- Divider with 'or' and Current Location Button -->
                 <div class="flex items-center justify-between my-4">
                     <hr class="w-full border-gray-300">
@@ -30,7 +29,7 @@
                     <hr class="w-full border-gray-300">
                 </div>
     
-                <button id="location-btn" class="w-full bg-gray-500 text-white p-3 rounded-lg hover:bg-gray-600">
+                <button id="location-btn" class="w-full bg-gradient-to-r from-gray-400 to-gray-700 hover:bg-gradient-to-r hover:from-sky-700 hover:to-sky-300 text-white p-3 rounded-lg hover:bg-gray-600">
                     Use Current Location
                 </button>
 
@@ -38,7 +37,7 @@
 
             <!-- Weather Display Section -->
             <section id="weatherDisplay" class="w-full lg:w-2/3 space-y-6">
-                <article id="weatherToday" class="bg-white shadow-lg rounded-lg p-4 flex flex-row justify-between">
+                <article id="weatherToday" class="rounded transition-colors duration-300 shadow-lg rounded-lg p-4 flex flex-row justify-between">
                     <!-- Weather data will be displayed here dynamically -->
                 </article>
 
