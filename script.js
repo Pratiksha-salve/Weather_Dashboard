@@ -9,8 +9,11 @@ search.addEventListener('click', function () {
     if (city) {
         fetchWeatherByCity(city);// Pass the city value to the function
         cityInput.value =''; // Clear the input field
-    } else {
+    } else if(!city.ok) {
+        alert("city not found");
+    } else{
         alert("Please enter a city name.");
+
     }
 });
 
@@ -22,7 +25,10 @@ function fetchWeatherByCity(city) {
 
     // Fetch current weather conditions
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error('City not found');
+            return response.json();
+            })
         .then(data => {
             const todayWeather = document.getElementById('weatherToday');
             const iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
@@ -69,7 +75,10 @@ function fetchWeatherByCity(city) {
 
     // Fetch 5 day forecast
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error('City not found');
+            return response.json();
+            })
         .then(forecast => {
             // Insert title for the 5-day forecast
             fiveDays.insertAdjacentHTML('afterbegin', `<h1 class="text-2xl font-semibold mb-4">5-Days Weather Forecast for ${forecast.city.name}</h1>`);
@@ -131,7 +140,10 @@ function fetchWeatherByCity(city) {
             localStorage.setItem('fiveDayForecast', JSON.stringify(forecast));
 
         })
-        .catch(error => console.log('Error:', error));
+        .catch(error => {
+            alert('Invalid city name. Please try again.');
+            console.error('Error fetching weather:', error);
+        });
 
 }
 
@@ -160,7 +172,8 @@ function fetchWeatherByLocation() {
     };
 
     const error = () => {
-        console.log("Error retrieving location");
+        alert('Invalid city name. Please try again.');
+            console.error('Error fetching weather:', error);;
     };
 
     // Request the user's location with high accuracy enabled
@@ -281,3 +294,4 @@ function loadWeatherFromLocalStorage() {
 
 // Call loadWeatherFromLocalStorage when the page loads
 window.onload = loadWeatherFromLocalStorage;
+
